@@ -5,11 +5,16 @@
 #include "polynomials.h"
 
 int main() {
-    int nums[4] = {0, 10, 20, 30};
+    Quadratic* x_squared = new Quadratic();
 
-    for (int i = 0; i < 4; i++) {
-        std::cout << "Next num: " << nums[i] << "\n";
-    }
+    std::cout << "Initial parameters: " << x_squared->toString() << std::endl;
+
+    std::vector<float> x_values = {1.0f, 2.0f, 3.0f, 4.0f};
+    std::vector<float> y_values = {2.0f, 5.0f, 10.0f, 17.0f};
+
+    x_squared->fit(x_values, y_values);
+
+    delete x_squared;
 
     return 0;
 }

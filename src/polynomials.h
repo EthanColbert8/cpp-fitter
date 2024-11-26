@@ -16,7 +16,7 @@ class Quadratic : public Function {
         Quadratic();
 
         void fit(std::vector<float> x, std::vector<float> y) override;
-        std::string print_params() override;
+        std::string toString() override;
         float evaluate(float x) override;
 };
 
