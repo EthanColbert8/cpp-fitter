@@ -15,10 +15,10 @@ class Quadratic : public Function {
         Quadratic(float a, float b, float c);
         Quadratic();
 
-        void fit(std::vector<float> x, std::vector<float> y) override;
+        void fit(std::vector<float> x, std::vector<float> y);
         std::string toString() override;
         float evaluate(float x) override;
+        float derivative(float x) override;
 };
-
 
 #endif

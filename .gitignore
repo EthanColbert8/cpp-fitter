@@ -1,3 +1,7 @@
+# CMake (and other) build artifacts
+build/
+bin/
+
 # Prerequisites
 *.d
 
