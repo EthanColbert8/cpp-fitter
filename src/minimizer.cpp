@@ -20,6 +20,7 @@ Minimizer::Minimizer(float tol, float step, int max_iter) : tol(tol), step(step)
 Minimizer::Minimizer() : tol(1.0e-5f), step(1.0e-4f), max_iter(100000) {}
 
 std::vector<float> Minimizer::minimize(Likelihood* func, std::vector<float> x, std::vector<float> y) {
+    std::cout << "Reached minimize function with likelihood." << std::endl; // debug print
 
     std::vector<float> current_params = func->getParams();
     float value = func->evaluate(x, y);
@@ -49,6 +50,14 @@ std::vector<float> Minimizer::minimize(Likelihood* func, std::vector<float> x, s
             std::cout << "Maximum iterations reached." << std::endl;
             break;
         }
+
+        // Trying to debug why things don't seem to be updating.
+        std::cout << "After " << current_iter << " iterations, gradient magnitude is: " << mag(grad) << std::endl;
+        std::cout << "Current params: " << current_params[0] << ", " << current_params[1] << ", " << current_params[2] << std::endl;
+        std::cout << "Minimum params: " << min_params[0] << ", " << min_params[1] << ", " << min_params[2] << std::endl;
+        std::cout << "Current value: " << value << ", Minimum value: " << min_value << std::endl;
+        std::cout << "Current gradient: " << grad[0] << ", " << grad[1] << ", " << grad[2] << std::endl;
+        std::cout << '\n';
     }
 
     std::cout << "Finished in " << current_iter << " iterations. Gradient magnitude is: " << mag(grad) << std::endl; // debug print
@@ -57,7 +66,7 @@ std::vector<float> Minimizer::minimize(Likelihood* func, std::vector<float> x, s
 }
 
 std::vector<float> Minimizer::minimize(Function* func, std::vector<float> init) {
-    //std::cout << "Minimizer class minimize function reached." << std::endl; // debug print
+    // std::cout << "Minimizer class minimize function reached." << std::endl; // debug print
 
     std::vector<float> params = init;
     float value = func->evaluate(params);
@@ -87,7 +96,7 @@ std::vector<float> Minimizer::minimize(Function* func, std::vector<float> init) 
             break;
         }
 
-        // Trying to debug why things don't seem to be updating.
+        // // Trying to debug why things don't seem to be updating.
         // std::cout << "After " << current_iter << " iterations, gradient magnitude is: " << mag(grad) << std::endl;
         // std::cout << "Current params: " << params[0] << ", " << params[1] << ", " << params[2] << std::endl;
         // std::cout << "Minimum params: " << min_params[0] << ", " << min_params[1] << ", " << min_params[2] << std::endl;

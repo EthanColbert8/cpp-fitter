@@ -15,16 +15,25 @@ int main() {
 
     Quadratic* quadratic = new Quadratic();
     ChiSquareLikelihood* chi_square = new ChiSquareLikelihood(quadratic);
-    Minimizer* minimizer = new Minimizer(1.0e-8f, 0.1f, 100000);
+    Minimizer* minimizer = new Minimizer(1.0e-6f, 0.1f, 100000);
 
-    std::vector<float> x_values = std::vector<float>(1000, 0.0f);
-    std::vector<float> y_values = std::vector<float>(1000, 0.0f);
-    for (int i = 0; i < 1000; i++) {
-        x_values[i] = i * 0.5f;
+    std::vector<float> x_values = std::vector<float>(100, 0.0f);
+    std::vector<float> y_values = std::vector<float>(100, 0.0f);
+    for (int i = 0; i < 100; i++) {
+        x_values[i] = i * 0.02f - 1.0f;
         y_values[i] = ((correct_a * x_values[i] * x_values[i]) + (correct_b * x_values[i]) + correct_c);
     }
 
-    std::vector<float> init = {1.0f, 0.0f, 0.0f};
+    // std::vector<float> init = {1.0f, 0.0f, 0.0f};
+
+    std::cout << "Printing initial model predictions." << std::endl;
+
+    for (int i = 0; i < 20; i++) {
+        float x = x_values[i];
+        float y = quadratic->evaluate(x);
+        std::cout << "x: " << x << ", prediction: " << y << ", true y: " << y_values[i] << std::endl;
+    }
+    std::cout << "\n";
 
     std::cout << "Attempting minimization." << std::endl;
 

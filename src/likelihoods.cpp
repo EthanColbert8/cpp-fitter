@@ -51,7 +51,7 @@ float ChiSquareLikelihood::evaluate(std::vector<float> x, std::vector<float> y) 
         chi_square += ((y[i] - y_fit) * (y[i] - y_fit));
     }
 
-    return chi_square;
+    return chi_square / N;
 }
 
 std::vector<float> ChiSquareLikelihood::gradient(std::vector<float> x, std::vector<float> y) {
@@ -60,6 +60,7 @@ std::vector<float> ChiSquareLikelihood::gradient(std::vector<float> x, std::vect
     }
 
     int N = x.size();
+    float gradient_coeff = 2.0f / N;
 
     if (N != y.size()) {
         throw std::runtime_error("Vectors of x and y values not of equal length.");
@@ -78,7 +79,7 @@ std::vector<float> ChiSquareLikelihood::gradient(std::vector<float> x, std::vect
 
 
         for (int j = 0; j < num_params; j++) {
-            gradient[j] += 2.0f * (y_fit - y[i]) * func_gradient[j];
+            gradient[j] += gradient_coeff * (y_fit - y[i]) * func_gradient[j];
         }
     }
 
